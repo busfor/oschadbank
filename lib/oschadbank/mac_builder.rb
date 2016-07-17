@@ -49,6 +49,8 @@ module Oschadbank
       @request_type = request_type
       @mac_key = mac_key
       @request_params = request_params
+
+      @request_type = :authorization if @request_type == :pre_authorization
     end
 
     def build
