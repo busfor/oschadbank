@@ -7,4 +7,7 @@ module Oschadbank
       super('Invalid request type')
     end
   end
+
+  class InvalidResponse < Error
+  end
 end
