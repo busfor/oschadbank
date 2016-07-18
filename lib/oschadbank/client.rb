@@ -23,11 +23,11 @@ module Oschadbank
       ParamsBuilder.new(self, :authorization, args).build
     end
 
-    def complete(args)
+    def complete_payment(args)
       PaymentComplete.new(self, request_url, args).perform
     end
 
-    def refund(args)
+    def refund_payment(args)
       PaymentRefund.new(self, request_url, args).perform
     end
   end
