@@ -8,6 +8,9 @@ module Oschadbank
     end
   end
 
+  class RequestError < Error
+  end
+
   class InvalidResponse < Error
   end
 end

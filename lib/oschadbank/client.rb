@@ -24,11 +24,13 @@ module Oschadbank
     end
 
     def complete_payment(args)
-      PaymentComplete.new(self, request_url, args).perform
+      request_params = ParamsBuilder.new(self, :complete, args).build
+      Request.new(request_url, request_params).perform
     end
 
     def refund_payment(args)
-      PaymentRefund.new(self, request_url, args).perform
+      request_params = ParamsBuilder.new(self, :refund, args).build
+      Request.new(request_url, request_params).perform
     end
   end
 end
