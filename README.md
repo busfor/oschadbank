@@ -29,89 +29,53 @@ client = Oschadbank::Client.new(
   merchant_id: 456,
   merchant_name: 'Shop name',
   merchant_url: 'www.my-shop.com',
-  merchant_gmt: '+3',           # optional
-  country_code: 'UA',           # optional
-  email: 'example@my-shop.com', # optional
 )
 ```
 
-Then you can get request url and request params for payments:
+Then you can send PreAuthorization or Authorization request:
 
 ```ruby
-url = client.request_url
-# => "https://3ds.oschadnybank.com/cgi-bin/cgi_link/"
-
-params = client.pre_authorization_request_params(
+client.pre_authorize(
   order_id: 123456,
   currency: 'UAH',
   amount: 100.5,
   description: 'Payment description',
   back_link: 'http://www.my-shop.com/back/link',
 )
-# => {:TRTYPE=>"0",
-#  :TERMINAL=>"123",
-#  :MERCHANT=>"456",
-#  :MERCH_NAME=>"Shop name",
-#  :MERCH_URL=>"www.my-shop.com",
-#  :MERCH_GMT=>"+3",
-#  :COUNTRY=>"UA",
-#  :EMAIL=>"example@my-shop.com",
-#  :TIMESTAMP=>"20160718093533",
-#  :NONCE=>"c82f595aef2ead17103c806b701e994c",
-#  :ORDER=>"123456",
-#  :CURRENCY=>"UAH",
-#  :AMOUNT=>"100.5",
-#  :DESC=>"Payment description",
-#  :BACKREF=>"http://www.my-shop.com/back/link",
-#  :P_SIGN=>"040a2920ec647e901756349491bb0167fa184747"}
 
-params = client.authorization_request_params(
+client.authorize(
   order_id: 123456,
   currency: 'UAH',
   amount: 100.5,
   description: 'Payment description',
   back_link: 'http://www.my-shop.com/back/link',
 )
-# => {:TRTYPE=>"1",
-#  :TERMINAL=>"123",
-#  :MERCHANT=>"456",
-#  :MERCH_NAME=>"Shop name",
-#  :MERCH_URL=>"www.my-shop.com",
-#  :MERCH_GMT=>"+3",
-#  :COUNTRY=>"UA",
-#  :EMAIL=>"example@my-shop.com",
-#  :TIMESTAMP=>"20160718093707",
-#  :NONCE=>"4a6de0a53f759469042ce3fb08accb13",
-#  :ORDER=>"123456",
-#  :CURRENCY=>"UAH",
-#  :AMOUNT=>"100.5",
-#  :DESC=>"Payment description",
-#  :BACKREF=>"http://www.my-shop.com/back/link",
-#  :P_SIGN=>"73e7a49bf4b729f5c66c160117e05d6b1f3a1f3e"}
 ```
 
-To complete payment:
+To complete payment after PreAuthorization request:
 
 ```ruby
-client.complete_payment(
+client.complete(
   order_id: 123456,
   currency: 'UAH',
   amount: 100.5,
   rrn: 111,
   int_ref: 222,
+  back_link: 'http://www.my-shop.com/back/link',
 )
 ```
 
 To perform a refund:
 
 ```ruby
-client.refund_payment(
+client.refund(
   order_id: 123456,
   currency: 'UAH',
   org_amount: 100.5,
   amount: 90,
   rrn: 111,
   int_ref: 222,
+  back_link: 'http://www.my-shop.com/back/link',
 )
 ```
 

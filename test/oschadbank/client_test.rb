@@ -13,6 +13,7 @@ module Oschadbank
     end
 
     def test_initial_attrs
+      assert_equal 'https://3ds.oschadnybank.com/cgi-bin/cgi_link/', @client.api_url
       assert_equal '00112233445566778899AABBCCDDEEFF', @client.mac_key
       assert_equal 123, @client.terminal_id
       assert_equal 456, @client.merchant_id
@@ -21,10 +22,6 @@ module Oschadbank
       assert_nil @client.merchant_gmt
       assert_nil @client.country_code
       assert_nil @client.email
-    end
-
-    def test_request_url
-      assert_equal 'https://3ds.oschadnybank.com/cgi-bin/cgi_link/', @client.request_url
     end
   end
 end
