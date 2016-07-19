@@ -9,6 +9,9 @@ module Oschadbank
         merchant_id: 456,
         merchant_name: 'Shop name',
         merchant_url: 'www.my-shop.com',
+        merchant_gmt: '+3',
+        country_code: 'UA',
+        email: 'mail@my-shop.com',
       )
     end
 
@@ -19,9 +22,9 @@ module Oschadbank
       assert_equal 456, @client.merchant_id
       assert_equal 'Shop name', @client.merchant_name
       assert_equal 'www.my-shop.com', @client.merchant_url
-      assert_nil @client.merchant_gmt
-      assert_nil @client.country_code
-      assert_nil @client.email
+      assert_equal '+3', @client.merchant_gmt
+      assert_equal 'UA', @client.country_code
+      assert_equal 'mail@my-shop.com', @client.email
     end
   end
 end
