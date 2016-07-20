@@ -8,7 +8,7 @@ module Oschadbank
       description: :DESC,
       rrn: :RRN,
       int_ref: :INT_REF,
-      back_link: :BACKREF,
+      back_url: :BACKREF,
     }.freeze
 
     TR_TYPE = {

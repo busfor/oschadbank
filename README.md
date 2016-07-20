@@ -46,7 +46,7 @@ params = client.pre_authorization_request_params(
   currency: 'UAH',
   amount: 100.5,
   description: 'Payment description',
-  back_link: 'http://www.my-shop.com/back/link',
+  back_url: 'http://www.my-shop.com/back/url',
 )
 # => {:TRTYPE=>"0",
 #  :TERMINAL=>"123",
@@ -70,7 +70,7 @@ params = client.authorization_request_params(
   currency: 'UAH',
   amount: 100.5,
   description: 'Payment description',
-  back_link: 'http://www.my-shop.com/back/link',
+  back_url: 'http://www.my-shop.com/back/url',
 )
 # => {:TRTYPE=>"1",
 #  :TERMINAL=>"123",
@@ -99,7 +99,7 @@ client.complete(
   amount: 100.5,
   rrn: 111,
   int_ref: 222,
-  back_link: 'http://www.my-shop.com/back/link',
+  back_url: 'http://www.my-shop.com/back/url',
 )
 ```
 
@@ -113,7 +113,7 @@ client.refund(
   amount: 90,
   rrn: 111,
   int_ref: 222,
-  back_link: 'http://www.my-shop.com/back/link',
+  back_url: 'http://www.my-shop.com/back/url',
 )
 ```
 

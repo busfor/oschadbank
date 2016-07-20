@@ -18,7 +18,7 @@ module Oschadbank
         currency: 'UAH',
         amount: 11.48,
         description: 'IT Books. Qty: 2',
-        back_link: 'https://www.sample.com/shop/reply',
+        back_url: 'https://www.sample.com/shop/reply',
       }
     end
 
