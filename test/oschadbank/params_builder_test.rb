@@ -17,7 +17,7 @@ module Oschadbank
         order_id: 771446,
         currency: 'UAH',
         amount: 11.48,
-        description: 'IT Books. Qty: 2',
+        description: 'Заказ 771446',
         back_url: 'https://www.sample.com/shop/reply',
       }
     end
@@ -38,7 +38,7 @@ module Oschadbank
       assert_equal '771446', params[:ORDER]
       assert_equal 'UAH', params[:CURRENCY]
       assert_equal '11.48', params[:AMOUNT]
-      assert_equal 'IT Books. Qty: 2', params[:DESC]
+      assert_equal 'Заказ 771446'.encode('CP1251', 'UTF-8'), params[:DESC]
       assert_equal 'https://www.sample.com/shop/reply', params[:BACKREF]
     end
 

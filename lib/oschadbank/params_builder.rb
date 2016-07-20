@@ -40,7 +40,9 @@ module Oschadbank
 
       @params.each do |key, value|
         key = REQUEST_PARAMS[key] || key
-        result[key] = value.to_s
+        value = value.to_s
+        value = value.encode('CP1251', 'UTF-8') if key == :DESC
+        result[key] = value
       end
 
       result.delete_if { |_k, v| v.empty? }
