@@ -12,17 +12,17 @@ module Oschadbank
     option :merchant_url
     option :merchant_gmt
     option :country_code
-    option :email
+    option :email, default: proc { nil }
 
-    def pre_authorization_request_params(args)
+    def pre_auth_params(args)
       ParamsBuilder.new(self, :pre_authorization, args).build
     end
 
-    def authorization_request_params(args)
+    def auth_params(args)
       ParamsBuilder.new(self, :authorization, args).build
     end
 
-    def complete(args)
+    def charge(args)
       request_params = ParamsBuilder.new(self, :complete, args).build
       Request.new(api_url, request_params).perform
     end

@@ -41,7 +41,7 @@ Then you can get request url and request params for payments:
 url = client.api_url
 # => "https://3ds.oschadnybank.com/cgi-bin/cgi_link/"
 
-params = client.pre_authorization_request_params(
+params = client.pre_auth_params(
   order_id: 123456,
   currency: 'UAH',
   amount: 100.5,
@@ -65,7 +65,7 @@ params = client.pre_authorization_request_params(
 #  :BACKREF=>"http://www.my-shop.com/back/link",
 #  :P_SIGN=>"040a2920ec647e901756349491bb0167fa184747"}
 
-params = client.authorization_request_params(
+params = client.auth_params(
   order_id: 123456,
   currency: 'UAH',
   amount: 100.5,
@@ -93,7 +93,7 @@ params = client.authorization_request_params(
 To complete payment after PreAuthorization request:
 
 ```ruby
-client.complete(
+client.charge(
   order_id: 123456,
   currency: 'UAH',
   amount: 100.5,
