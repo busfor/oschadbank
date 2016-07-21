@@ -1,60 +1,17 @@
 module Oschadbank
   class MacBuilder
-    PARAMS_ORDER = {
-      authorization: [
-        :AMOUNT,
-        :CURRENCY,
-        :ORDER,
-        :DESC,
-        :MERCH_NAME,
-        :MERCH_URL,
-        :MERCHANT,
-        :TERMINAL,
-        :EMAIL,
-        :TRTYPE,
-        :COUNTRY,
-        :MERCH_GMT,
-        :TIMESTAMP,
-        :NONCE,
-        :BACKREF,
-      ].freeze,
-      complete: [
-        :ORDER,
-        :AMOUNT,
-        :CURRENCY,
-        :RRN,
-        :INT_REF,
-        :TRTYPE,
-        :TERMINAL,
-        :BACKREF,
-        :TIMESTAMP,
-        :NONCE,
-      ].freeze,
-      refund: [
-        :ORDER,
-        :ORG_AMOUNT,
-        :AMOUNT,
-        :CURRENCY,
-        :RRN,
-        :INT_REF,
-        :TRTYPE,
-        :TERMINAL,
-        :BACKREF,
-        :TIMESTAMP,
-        :NONCE,
-      ].freeze,
-    }.freeze
-
+    include Constants
+    
     def initialize(request_type, mac_key, request_params)
       @request_type = request_type
       @mac_key = mac_key
       @request_params = request_params
 
-      @request_type = :authorization if @request_type == :pre_authorization
+      @request_type = :auth if @request_type == :pre_auth
     end
 
     def build
-      params_order = PARAMS_ORDER[@request_type]
+      params_order = MAC_PARAMS_ORDER[@request_type]
       return unless params_order
 
       params_str = join_params(@request_params, params_order)

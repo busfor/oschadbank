@@ -1,8 +1,8 @@
 module Oschadbank
   class Client
-    extend Dry::Initializer::Mixin
+    include Constants
 
-    DEFAULT_API_URL = 'https://3ds.oschadnybank.com/cgi-bin/cgi_link/'
+    extend Dry::Initializer::Mixin
 
     option :api_url, default: proc { DEFAULT_API_URL }
     option :mac_key
@@ -15,11 +15,11 @@ module Oschadbank
     option :email, default: proc { nil }
 
     def pre_auth_params(args)
-      ParamsBuilder.new(self, :pre_authorization, args).build
+      ParamsBuilder.new(self, :pre_auth, args).build
     end
 
     def auth_params(args)
-      ParamsBuilder.new(self, :authorization, args).build
+      ParamsBuilder.new(self, :auth, args).build
     end
 
     def charge(args)
@@ -30,6 +30,10 @@ module Oschadbank
     def refund(args)
       request_params = ParamsBuilder.new(self, :refund, args).build
       Request.new(api_url, request_params).perform
+    end
+
+    def response(params)
+      Response.new(params)
     end
   end
 end

@@ -23,7 +23,7 @@ module Oschadbank
     end
 
     def test_it_build_params_from_client
-      params = ParamsBuilder.new(@client, :pre_authorization, @args).build
+      params = ParamsBuilder.new(@client, :pre_auth, @args).build
 
       assert_equal 'W0000001', params[:TERMINAL]
       assert_equal 'oschad3DSW0000001', params[:MERCHANT]
@@ -33,7 +33,7 @@ module Oschadbank
     end
 
     def test_it_build_params_from_args
-      params = ParamsBuilder.new(@client, :pre_authorization, @args).build
+      params = ParamsBuilder.new(@client, :pre_auth, @args).build
 
       assert_equal '771446', params[:ORDER]
       assert_equal 'UAH', params[:CURRENCY]
@@ -43,7 +43,7 @@ module Oschadbank
     end
 
     def test_it_generate_nonce
-      params = ParamsBuilder.new(@client, :pre_authorization, @args).build
+      params = ParamsBuilder.new(@client, :pre_auth, @args).build
 
       assert_includes 8..32, params[:NONCE].length
     end
@@ -51,7 +51,7 @@ module Oschadbank
     def test_it_set_current_timestamp
       params =
         Time.stub(:now, Time.gm(2003, 1, 5, 15, 30, 21)) do
-          ParamsBuilder.new(@client, :pre_authorization, @args).build
+          ParamsBuilder.new(@client, :pre_auth, @args).build
         end
 
       assert_equal '20030105153021', params[:TIMESTAMP]
@@ -63,7 +63,7 @@ module Oschadbank
 
       params =
         MacBuilder.stub(:new, mac_builder) do
-          ParamsBuilder.new(@client, :pre_authorization, @args).build
+          ParamsBuilder.new(@client, :pre_auth, @args).build
         end
 
       assert_equal 'fa8345c0f2b5c6406878b9cf4d8db723f1ddf9cc', params[:P_SIGN]

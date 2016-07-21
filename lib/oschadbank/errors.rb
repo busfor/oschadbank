@@ -10,4 +10,10 @@ module Oschadbank
 
   class InvalidResponse < Error
   end
+
+  class ParamRequred < Error
+    def initialize(param)
+      super("Param #{param} required")
+    end
+  end
 end

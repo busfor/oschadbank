@@ -90,7 +90,7 @@ params = client.auth_params(
 #  :P_SIGN=>"73e7a49bf4b729f5c66c160117e05d6b1f3a1f3e"}
 ```
 
-To complete payment after PreAuthorization request:
+To complete payment after pre-authorization request:
 
 ```ruby
 client.charge(
@@ -115,6 +115,53 @@ client.refund(
   int_ref: 222,
   back_url: 'http://www.my-shop.com/back/url',
 )
+```
+
+Also you can check response from Oschadbank:
+
+```ruby
+response = client.response(
+  'Function' => 'TransResponse',
+  'Result' => '0',
+  'RC' => '00',
+  'Amount' => '100.50',
+  'Currency' => 'UAH',
+  'Order' => '123456',
+  'RRN' => '111',
+  'IntRef' => '222',
+  'AuthCode' => '333',
+  'TRTYPE' => '1',
+)
+
+response.auth?
+# => true
+
+response.success?
+# => true
+
+response.status_code
+# => "00"
+
+response.status_message
+# => "Transaction successfully completed (Approved)"
+
+response.order_id
+# => "123456"
+
+response.currency
+# => "UAH"
+
+response.amount
+# => 100.5
+
+response.rrn
+# => "111"
+
+response.int_ref
+# => "222"
+
+response.auth_code
+# => "333"
 ```
 
 ## Development

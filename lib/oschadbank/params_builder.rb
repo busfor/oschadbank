@@ -1,5 +1,7 @@
 module Oschadbank
   class ParamsBuilder
+    include Constants
+
     REQUEST_PARAMS = {
       amount: :AMOUNT,
       org_amount: :ORG_AMOUNT,
@@ -9,13 +11,6 @@ module Oschadbank
       rrn: :RRN,
       int_ref: :INT_REF,
       back_url: :BACKREF,
-    }.freeze
-
-    TR_TYPE = {
-      pre_authorization: '0',
-      authorization: '1',
-      complete: '21',
-      refund: '24',
     }.freeze
 
     def initialize(client, request_type, params)
