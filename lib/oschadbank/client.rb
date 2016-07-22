@@ -23,7 +23,7 @@ module Oschadbank
     end
 
     def charge(args)
-      request_params = ParamsBuilder.new(self, :complete, args).build
+      request_params = ParamsBuilder.new(self, :charge, args).build
       Request.new(api_url, request_params).perform
     end
 
