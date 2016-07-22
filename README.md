@@ -1,5 +1,8 @@
 # Oschadbank
 
+[![Gem Version](https://badge.fury.io/rb/oschadbank.svg)](https://badge.fury.io/rb/oschadbank)
+[![Build Status](https://travis-ci.org/busfor/oschadbank.svg?branch=master)](https://travis-ci.org/busfor/oschadbank)
+
 Ruby wrapper for Oschadbank.ua API
 
 ## Installation
