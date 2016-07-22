@@ -33,7 +33,7 @@ module Oschadbank
     end
 
     def response(params)
-      Response.new(params)
+      Response.new(self, params)
     end
   end
 end

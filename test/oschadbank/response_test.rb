@@ -2,8 +2,13 @@ require 'test_helper'
 
 module Oschadbank
   class ResponseTest < MiniTest::Test
+    def setup
+      @client = Minitest::Mock.new
+      @client.expect :mac_key, '00112233445566778899AABBCCDDEEFF'
+    end
+
     def test_it_process_auth_response_params
-      response = Response.new(
+      response = Response.new(@client,
         'Function' => 'TransResponse',
         'Result' => '0',
         'RC' => '00',
@@ -14,6 +19,7 @@ module Oschadbank
         'IntRef' => '1234567890',
         'AuthCode' => '321',
         'TRTYPE' => '1',
+        'P_SIGN' => 'ffff', # TODO
       )
 
       assert_equal :auth, response.request_type
@@ -35,7 +41,7 @@ module Oschadbank
     end
 
     def test_it_process_error_response_params
-      response = Response.new(
+      response = Response.new(@client,
         'Function' => 'TransResponse',
         'Result' => '3',
         'RC' => '55',
@@ -43,6 +49,7 @@ module Oschadbank
         'Currency' => 'UAH',
         'Order' => '123',
         'TRTYPE' => '0',
+        'P_SIGN' => 'ffff', # TODO
       )
 
       assert_equal true, response.pre_auth?
@@ -61,33 +68,56 @@ module Oschadbank
         'RC' => '00',
         'Order' => '123',
         'TRTYPE' => '0',
+        'P_SIGN' => 'ffff', # TODO
       }
       params_without_result = {
         'RC' => '00',
         'Order' => '123',
         'TRTYPE' => '0',
+        'P_SIGN' => 'ffff', # TODO
       }
       params_without_rc = {
         'Result' => '0',
         'Order' => '123',
         'TRTYPE' => '0',
+        'P_SIGN' => 'ffff', # TODO
       }
       params_without_order = {
         'Result' => '0',
         'RC' => '00',
         'TRTYPE' => '0',
+        'P_SIGN' => 'ffff', # TODO
       }
       params_without_tr_type = {
         'Result' => '0',
         'RC' => '00',
         'Order' => '123',
+        'P_SIGN' => 'ffff', # TODO
+      }
+      params_without_p_sign = {
+        'Result' => '0',
+        'RC' => '00',
+        'Order' => '123',
+        'TRTYPE' => '0',
       }
 
-      response = Response.new(valid_params) # not raise
-      assert_raises(ParamRequred) { Response.new(params_without_result) }
-      assert_raises(ParamRequred) { Response.new(params_without_rc) }
-      assert_raises(ParamRequred) { Response.new(params_without_order) }
-      assert_raises(ParamRequred) { Response.new(params_without_tr_type) }
+      response = Response.new(@client, valid_params) # not raise
+      assert_raises(ParamRequred) { Response.new(@client, params_without_result) }
+      assert_raises(ParamRequred) { Response.new(@client, params_without_rc) }
+      assert_raises(ParamRequred) { Response.new(@client, params_without_order) }
+      assert_raises(ParamRequred) { Response.new(@client, params_without_tr_type) }
+      assert_raises(ParamRequred) { Response.new(@client, params_without_p_sign) }
+    end
+
+    def test_it_check_signature
+      params_with_invalid_p_sign = {
+        'Result' => '0',
+        'RC' => '00',
+        'Order' => '123',
+        'TRTYPE' => '0',
+        'P_SIGN' => 'invalid',
+      }
+      assert_raises(InvalidSignature) { Response.new(@client, params_with_invalid_p_sign) }
     end
   end
 end

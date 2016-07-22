@@ -16,4 +16,10 @@ module Oschadbank
       super("Param #{param} required")
     end
   end
+
+  class InvalidSignature < Error
+    def initialize
+      super("Invalid signature param")
+    end
+  end
 end

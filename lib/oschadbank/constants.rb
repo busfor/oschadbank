@@ -52,6 +52,9 @@ module Oschadbank
         :TIMESTAMP,
         :NONCE,
       ].freeze,
+      response: [
+        # TODO
+      ].freeze
     }.freeze
 
     RESULT_MESSAGES = {

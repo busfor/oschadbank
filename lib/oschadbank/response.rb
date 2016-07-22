@@ -2,10 +2,12 @@ module Oschadbank
   class Response
     include Constants
 
-    def initialize(params)
+    def initialize(client, params)
+      @client = client
       @params = params
 
       check_required!
+      check_signature!
     end
 
     def request_type
@@ -67,10 +69,19 @@ module Oschadbank
     private
 
     def check_required!
-      required_params = ['Order', 'Result', 'RC', 'TRTYPE']
+      required_params = %w(Order Result RC TRTYPE P_SIGN)
       required_params.each do |param|
         raise ParamRequred.new(param) if @params[param].to_s.empty?
       end
+    end
+
+    def check_signature!
+      params = @params.dup
+      signature = params.delete('P_SIGN')
+
+      valid_signature = MacBuilder.new(:response, @client.mac_key, params).build
+
+      raise InvalidSignature unless signature == valid_signature
     end
 
     def result_code
