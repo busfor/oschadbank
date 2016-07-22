@@ -133,35 +133,23 @@ response = client.response(
   'TRTYPE' => '1',
 )
 
-response.auth?
-# => true
+response.request_type   # => :auth
+response.pre_auth?      # => false
+response.auth?          # => true
+response.charge?        # => false
+response.refund?        # => false
 
-response.success?
-# => true
+response.success?       # => true
+response.status_code    # => "00"
+response.status_message # => "Transaction successfully completed (Approved)"
 
-response.status_code
-# => "00"
+response.order_id       # => "123456"
+response.currency       # => "UAH"
+response.amount         # => 100.5
 
-response.status_message
-# => "Transaction successfully completed (Approved)"
-
-response.order_id
-# => "123456"
-
-response.currency
-# => "UAH"
-
-response.amount
-# => 100.5
-
-response.rrn
-# => "111"
-
-response.int_ref
-# => "222"
-
-response.auth_code
-# => "333"
+response.rrn            # => "111"
+response.int_ref        # => "222"
+response.auth_code      # => "333"
 ```
 
 ## Development
