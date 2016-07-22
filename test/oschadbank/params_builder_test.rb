@@ -25,27 +25,27 @@ module Oschadbank
     def test_it_build_params_from_client
       params = ParamsBuilder.new(@client, :pre_auth, @args).build
 
-      assert_equal 'W0000001', params[:TERMINAL]
-      assert_equal 'oschad3DSW0000001', params[:MERCHANT]
-      assert_equal 'Books Online Inc.', params[:MERCH_NAME]
-      assert_equal 'www.sample.com', params[:MERCH_URL]
-      assert_equal 'pgw@mail.sample.com', params[:EMAIL]
+      assert_equal 'W0000001', params['TERMINAL']
+      assert_equal 'oschad3DSW0000001', params['MERCHANT']
+      assert_equal 'Books Online Inc.', params['MERCH_NAME']
+      assert_equal 'www.sample.com', params['MERCH_URL']
+      assert_equal 'pgw@mail.sample.com', params['EMAIL']
     end
 
     def test_it_build_params_from_args
       params = ParamsBuilder.new(@client, :pre_auth, @args).build
 
-      assert_equal '771446', params[:ORDER]
-      assert_equal 'UAH', params[:CURRENCY]
-      assert_equal '11.48', params[:AMOUNT]
-      assert_equal 'Заказ 771446'.encode('CP1251', 'UTF-8'), params[:DESC]
-      assert_equal 'https://www.sample.com/shop/reply', params[:BACKREF]
+      assert_equal '771446', params['ORDER']
+      assert_equal 'UAH', params['CURRENCY']
+      assert_equal '11.48', params['AMOUNT']
+      assert_equal 'Заказ 771446'.encode('CP1251', 'UTF-8'), params['DESC']
+      assert_equal 'https://www.sample.com/shop/reply', params['BACKREF']
     end
 
     def test_it_generate_nonce
       params = ParamsBuilder.new(@client, :pre_auth, @args).build
 
-      assert_includes 8..32, params[:NONCE].length
+      assert_includes 8..32, params['NONCE'].length
     end
 
     def test_it_set_current_timestamp
@@ -54,7 +54,7 @@ module Oschadbank
           ParamsBuilder.new(@client, :pre_auth, @args).build
         end
 
-      assert_equal '20030105153021', params[:TIMESTAMP]
+      assert_equal '20030105153021', params['TIMESTAMP']
     end
 
     def test_it_generate_mac
@@ -66,7 +66,7 @@ module Oschadbank
           ParamsBuilder.new(@client, :pre_auth, @args).build
         end
 
-      assert_equal 'fa8345c0f2b5c6406878b9cf4d8db723f1ddf9cc', params[:P_SIGN]
+      assert_equal 'fa8345c0f2b5c6406878b9cf4d8db723f1ddf9cc', params['P_SIGN']
     end
 
     def test_it_raise_error_for_invalid_request_type

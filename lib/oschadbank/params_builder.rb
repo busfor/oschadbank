@@ -3,14 +3,14 @@ module Oschadbank
     include Constants
 
     REQUEST_PARAMS = {
-      amount: :AMOUNT,
-      org_amount: :ORG_AMOUNT,
-      currency: :CURRENCY,
-      order_id: :ORDER,
-      description: :DESC,
-      rrn: :RRN,
-      int_ref: :INT_REF,
-      back_url: :BACKREF,
+      amount: 'AMOUNT',
+      org_amount: 'ORG_AMOUNT',
+      currency: 'CURRENCY',
+      order_id: 'ORDER',
+      description: 'DESC',
+      rrn: 'RRN',
+      int_ref: 'INT_REF',
+      back_url: 'BACKREF',
     }.freeze
 
     def initialize(client, request_type, params)
@@ -21,28 +21,28 @@ module Oschadbank
 
     def build
       result = {
-        TRTYPE: tr_type,
-        TERMINAL: @client.terminal_id.to_s,
-        MERCHANT: @client.merchant_id.to_s,
-        MERCH_NAME: @client.merchant_name.to_s,
-        MERCH_URL: @client.merchant_url.to_s,
-        MERCH_GMT: @client.merchant_gmt.to_s,
-        COUNTRY: @client.country_code.to_s,
-        EMAIL: @client.email.to_s,
-        TIMESTAMP: timestamp,
-        NONCE: nonce,
+        'TRTYPE' => tr_type,
+        'TERMINAL' => @client.terminal_id.to_s,
+        'MERCHANT' => @client.merchant_id.to_s,
+        'MERCH_NAME' => @client.merchant_name.to_s,
+        'MERCH_URL' => @client.merchant_url.to_s,
+        'MERCH_GMT' => @client.merchant_gmt.to_s,
+        'COUNTRY' => @client.country_code.to_s,
+        'EMAIL' => @client.email.to_s,
+        'TIMESTAMP' => timestamp,
+        'NONCE' => nonce,
       }
 
       @params.each do |key, value|
         key = REQUEST_PARAMS[key] || key
         value = value.to_s
-        value = value.encode('CP1251', 'UTF-8') if key == :DESC
+        value = value.encode('CP1251', 'UTF-8') if key == 'DESC'
         result[key] = value
       end
 
       result.delete_if { |_k, v| v.empty? }
 
-      result[:P_SIGN] = mac_signature(result)
+      result['P_SIGN'] = mac_signature(result)
 
       result
     end
