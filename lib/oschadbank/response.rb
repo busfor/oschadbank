@@ -81,7 +81,7 @@ module Oschadbank
 
       valid_signature = MacBuilder.new(:response, @client.mac_key, params).build
 
-      raise InvalidSignature unless signature == valid_signature
+      raise InvalidSignature unless signature.downcase == valid_signature
     end
 
     def result_code

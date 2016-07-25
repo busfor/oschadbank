@@ -19,7 +19,7 @@ module Oschadbank
         'IntRef' => '1234567890',
         'AuthCode' => '321',
         'TRTYPE' => '1',
-        'P_SIGN' => '09a9141077dea116204d6de5afd5a036ca95b79a',
+        'P_SIGN' => '09A9141077DEA116204D6DE5AFD5A036CA95B79A',
       )
 
       assert_equal :auth, response.request_type
