@@ -59,7 +59,7 @@ module Oschadbank
     end
 
     def int_ref
-      @params['IntRef']
+      @params['Int_Ref']
     end
 
     def auth_code

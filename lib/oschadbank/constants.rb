@@ -55,14 +55,14 @@ module Oschadbank
       response: [
         'TERMINAL',
         'TRTYPE',
-        'ORDER',
-        'AMOUNT',
-        'CURRENCY',
+        'Order',
+        'Amount',
+        'Currency',
         'Result',
         'RC',
         'AuthCode',
         'RRN',
-        'IntRef',
+        'Int_Ref',
         'TIMESTAMP',
         'NONCE',
       ].freeze

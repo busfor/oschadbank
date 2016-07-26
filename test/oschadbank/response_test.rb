@@ -16,10 +16,10 @@ module Oschadbank
         'Currency' => 'UAH',
         'Order' => '123',
         'RRN' => '456',
-        'IntRef' => '1234567890',
+        'Int_Ref' => '1234567890',
         'AuthCode' => '321',
         'TRTYPE' => '1',
-        'P_SIGN' => '60C72DEB463A48CA17E05673750A15D432B04136',
+        'P_SIGN' => '9F87F9C42568D092815D13FE135B03B8C2C070C0',
       )
 
       assert_equal :auth, response.request_type
@@ -49,7 +49,7 @@ module Oschadbank
         'Currency' => 'UAH',
         'Order' => '123',
         'TRTYPE' => '0',
-        'P_SIGN' => '2e8391d64c230c6cb5ecd259cb13cd6922aa1401',
+        'P_SIGN' => '09c1eafe1eb0ddb6e5d9a37cc5921f5b99327b57',
       )
 
       assert_equal true, response.pre_auth?
@@ -68,31 +68,31 @@ module Oschadbank
         'RC' => '00',
         'Order' => '123',
         'TRTYPE' => '0',
-        'P_SIGN' => '0019b8a20bfae7ff16e42a72d77f5da96205f170',
+        'P_SIGN' => 'f4e66890e4f61b1557ab8e2be364c536a376e145',
       }
       params_without_result = {
         'RC' => '00',
         'Order' => '123',
         'TRTYPE' => '0',
-        'P_SIGN' => '0019b8a20bfae7ff16e42a72d77f5da96205f170',
+        'P_SIGN' => 'f4e66890e4f61b1557ab8e2be364c536a376e145',
       }
       params_without_rc = {
         'Result' => '0',
         'Order' => '123',
         'TRTYPE' => '0',
-        'P_SIGN' => '0019b8a20bfae7ff16e42a72d77f5da96205f170',
+        'P_SIGN' => 'f4e66890e4f61b1557ab8e2be364c536a376e145',
       }
       params_without_order = {
         'Result' => '0',
         'RC' => '00',
         'TRTYPE' => '0',
-        'P_SIGN' => '0019b8a20bfae7ff16e42a72d77f5da96205f170',
+        'P_SIGN' => 'f4e66890e4f61b1557ab8e2be364c536a376e145',
       }
       params_without_tr_type = {
         'Result' => '0',
         'RC' => '00',
         'Order' => '123',
-        'P_SIGN' => '0019b8a20bfae7ff16e42a72d77f5da96205f170',
+        'P_SIGN' => 'f4e66890e4f61b1557ab8e2be364c536a376e145',
       }
       params_without_p_sign = {
         'Result' => '0',
