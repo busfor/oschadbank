@@ -16,7 +16,7 @@ module Oschadbank
       @args = {
         order_id: 777,
         currency: 'UAH',
-        amount: 11.48,
+        amount: 11.4,
         description: 'Заказ 777',
         back_url: 'https://www.sample.com/shop/reply',
       }
@@ -37,7 +37,7 @@ module Oschadbank
 
       assert_equal '000777', params['ORDER']
       assert_equal 'UAH', params['CURRENCY']
-      assert_equal '11.48', params['AMOUNT']
+      assert_equal '11.40', params['AMOUNT']
       assert_equal 'Заказ 777'.encode('CP1251', 'UTF-8'), params['DESC']
       assert_equal 'https://www.sample.com/shop/reply', params['BACKREF']
     end

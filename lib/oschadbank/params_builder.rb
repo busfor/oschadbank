@@ -38,6 +38,7 @@ module Oschadbank
         value = value.to_s
         value = value.encode('CP1251', 'UTF-8') if key == 'DESC'
         value = value.rjust(6, '0') if key == 'ORDER'
+        value = '%.2f' % value if %w(AMOUNT ORG_AMOUNT).include?(key)
         result[key] = value
       end
 
