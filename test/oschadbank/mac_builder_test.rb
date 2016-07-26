@@ -20,7 +20,7 @@ module Oschadbank
       }
       mac_key = '00112233445566778899AABBCCDDEEFF'
 
-      expected_mac = 'fa8345c0f2b5c6406878b9cf4d8db723f1ddf9cc'
+      expected_mac = '5e0604f20d4f4d9e1ee08ec18ddee212f3fcb9f0'
       mac = MacBuilder.new(:auth, mac_key, request_params).build
 
       assert_equal expected_mac, mac
