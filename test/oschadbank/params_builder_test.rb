@@ -14,10 +14,10 @@ module Oschadbank
       @client.expect :email, 'pgw@mail.sample.com'
 
       @args = {
-        order_id: 771446,
+        order_id: 777,
         currency: 'UAH',
         amount: 11.48,
-        description: 'Заказ 771446',
+        description: 'Заказ 777',
         back_url: 'https://www.sample.com/shop/reply',
       }
     end
@@ -35,10 +35,10 @@ module Oschadbank
     def test_it_build_params_from_args
       params = ParamsBuilder.new(@client, :pre_auth, @args).build
 
-      assert_equal '771446', params['ORDER']
+      assert_equal '000777', params['ORDER']
       assert_equal 'UAH', params['CURRENCY']
       assert_equal '11.48', params['AMOUNT']
-      assert_equal 'Заказ 771446'.encode('CP1251', 'UTF-8'), params['DESC']
+      assert_equal 'Заказ 777'.encode('CP1251', 'UTF-8'), params['DESC']
       assert_equal 'https://www.sample.com/shop/reply', params['BACKREF']
     end
 

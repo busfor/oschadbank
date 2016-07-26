@@ -37,6 +37,7 @@ module Oschadbank
         key = REQUEST_PARAMS[key] || key
         value = value.to_s
         value = value.encode('CP1251', 'UTF-8') if key == 'DESC'
+        value = value.rjust(6, '0') if key == 'ORDER'
         result[key] = value
       end
 
