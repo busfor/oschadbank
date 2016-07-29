@@ -199,7 +199,7 @@ module Oschadbank
       '99' => 'Reserved',
     }.freeze
 
-    RESULT_SUCCESS = ['0'].freeze
+    RESULT_SUCCESS = ['0', '1'].freeze
     RC_SUCCESS = ['00', '11', '16'].freeze
   end
 end
