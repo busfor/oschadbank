@@ -102,11 +102,11 @@ module Oschadbank
       }
 
       response = Response.new(@client, valid_params) # not raise
-      assert_raises(ParamRequred) { Response.new(@client, params_without_result) }
-      assert_raises(ParamRequred) { Response.new(@client, params_without_rc) }
-      assert_raises(ParamRequred) { Response.new(@client, params_without_order) }
-      assert_raises(ParamRequred) { Response.new(@client, params_without_tr_type) }
-      assert_raises(ParamRequred) { Response.new(@client, params_without_p_sign) }
+      assert_raises(ParamRequired) { Response.new(@client, params_without_result) }
+      assert_raises(ParamRequired) { Response.new(@client, params_without_rc) }
+      assert_raises(ParamRequired) { Response.new(@client, params_without_order) }
+      assert_raises(ParamRequired) { Response.new(@client, params_without_tr_type) }
+      assert_raises(ParamRequired) { Response.new(@client, params_without_p_sign) }
     end
 
     def test_it_check_signature

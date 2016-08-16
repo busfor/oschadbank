@@ -71,7 +71,7 @@ module Oschadbank
     def check_required!
       required_params = %w(Order Result RC TRTYPE P_SIGN)
       required_params.each do |param|
-        raise ParamRequred.new(param) if @params[param].to_s.empty?
+        raise ParamRequired.new(param) if @params[param].to_s.empty?
       end
     end
 

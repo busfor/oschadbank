@@ -11,7 +11,7 @@ module Oschadbank
   class InvalidResponse < Error
   end
 
-  class ParamRequred < Error
+  class ParamRequired < Error
     def initialize(param)
       super("Param #{param} required")
     end
